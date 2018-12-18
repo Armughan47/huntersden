@@ -1,0 +1,35 @@
+#include <Windows.h>
+#include <GL\freeglut.h>
+#include <iostream>
+
+
+void display() {
+
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.9, 0.3, 0.0);
+    glVertex3f(0.2,-0.2, 0);
+    glVertex3f(0.4, -0.1, 0);
+    glVertex3f(0.6,-0.2, 0);
+    glVertex3f(0.6,-0.5, 0);
+    glVertex3f(0.2, -0.5, 0);
+    glEnd();
+
+
+    glFlush();
+}
+
+int main(int argc, char** argv) {
+
+    glutInit(&argc, argv);
+    glutCreateWindow("Polygon assignment");
+    glutInitWindowSize(400, 400);
+    glutInitWindowPosition(100, 100);
+    glutDisplayFunc(display);
+    glutMainLoop();
+    return 0;
+
+}

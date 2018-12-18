@@ -1,0 +1,113 @@
+#include <windows.h>
+#include <GL\freeglut.h>
+#include <cmath>
+#include <stdlib.h>
+int color=1;
+int x2=-10,x3=-10,x4=10,x5=10,y5=-10,y2=-10,y3=10,y4=10;
+
+void myInit() {
+    glClearColor(0.0,0.0,0.0,1.0);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(-100,100,-100,100,-1,1);
+    glMatrixMode(GL_MODELVIEW);
+}
+
+void display() {
+    glClearColor(0.0,0.0,0.0,1.0);
+
+    glClear(GL_COLOR_BUFFER_BIT);
+    glBegin(GL_QUADS);
+    glColor3f(0.0,0.0,1.0);
+    glVertex2f(x2,y2);
+    glVertex2f(x3,y3);
+    glVertex2f(x4,y4);
+    glVertex2f(x5,y5);
+    glEnd();
+    glFlush();
+}
+
+void squaremove(int key,int x,int y){
+    if (key==GLUT_KEY_UP){
+   y2++;
+   y3++;
+   y4++;
+   y5++;
+   glutPostRedisplay();
+    }
+    if (key==GLUT_KEY_DOWN){
+        y2--;
+        y3--;
+        y4--;
+        y5--;
+        glutPostRedisplay();
+    }
+    if (key==GLUT_KEY_RIGHT){
+        x2++;
+        x3++;
+        x4++;
+        x5++;
+        glutPostRedisplay();
+    }
+    if (key==GLUT_KEY_LEFT){
+        x2--;
+        x3--;
+        x4--;
+        x5--;
+        glutPostRedisplay();
+    }
+}
+
+void centre(int key, int x, int y){
+    if(key==GLUT_KEY_UP){
+        while(y3!=10){
+            y2--;
+            y3--;
+            y4--;
+            y5--;
+            glutPostRedisplay();
+        }}
+        if(key==GLUT_KEY_DOWN) {
+            while (y3 != 10) {
+                y2++;
+                y3++;
+                y4++;
+                y5++;
+                glutPostRedisplay();
+            }
+        }
+            if(key==GLUT_KEY_RIGHT){
+                while(x4!=10){
+                    x2--;
+                    x3--;
+                    x4--;
+                    x5--;
+                    glutPostRedisplay();
+                }}
+                if(key==GLUT_KEY_LEFT){
+                    while(x4!=10){
+                        x2++;
+                        x3++;
+                        x4++;
+                        x5++;
+                        glutPostRedisplay();
+                    }
+                }
+}
+
+
+int main(int argc, char ** argv) {
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB);
+    glutInitWindowSize(800,800);
+    glutInitWindowPosition(100,100);
+
+    glutCreateWindow("movingSquare");
+    glutSpecialFunc(squaremove);
+    glutSpecialUpFunc(centre);
+    glutDisplayFunc(display);
+    myInit();
+    glutMainLoop();
+
+    return 0;
+}
